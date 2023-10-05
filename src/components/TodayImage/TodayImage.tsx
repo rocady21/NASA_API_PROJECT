@@ -1,8 +1,19 @@
 import React,{FC} from "react"
 import { Text, View,StyleSheet,Image,Button } from "react-native"
-import {PostImage} from "../../types/index"
+import {PostImage, RootStackParams} from "../../types/index"
+import {useNavigation} from "@react-navigation/native"
+import {NativeStackNavigationProp} from "@react-navigation/native-stack"
+
+// Para tipar la ruta 
+type PostImageNavigationProps = NativeStackNavigationProp<RootStackParams,"Details">
+
+
 //Componente tipado
-const TodayImage:FC<PostImage> = ({date,title,url})=> {
+const TodayImage:FC<PostImage> = ({date,title,url,explanation})=> {
+    const {navigate} = useNavigation<PostImageNavigationProps>()
+    const HandleViewPress = ()=> {
+        navigate("Details",{title,date,url,explanation})
+    }
     
     return (
         <View style ={style.container}>
@@ -14,7 +25,7 @@ const TodayImage:FC<PostImage> = ({date,title,url})=> {
             <Text style={style.date}>{date}</Text>
 
             <View style={style.button}>
-                <Button title="View"/>
+                <Button title="View" onPress={HandleViewPress}/>
             </View>
         </View>
     )

@@ -42,6 +42,7 @@ const Home = ()=> {
 
 const style = StyleSheet.create({
     container:{
+        backgroundColor: "rgba(7,26,93,255)",
         flex:1,
         paddingHorizontal:16
     }
